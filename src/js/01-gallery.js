@@ -1,33 +1,33 @@
-import { galleryItems } from './gallery-items.js';
+// Add imports above this line
+import { galleryItems } from './gallery-items'
 // Change code below this line
 import SimpleLightbox from 'simplelightbox'
 import 'simplelightbox/dist/simple-lightbox.min.css'
-console.log(galleryItems);
 
+const galleryContainer = document.querySelector('.gallery')
+const cardsMarkup = createGalleryCardsMarkup(galleryItems)
 
-const galleryContainer = document.querySelector('.gallery');
-const photosMarkup = createColorPhotosMarkup(galleryItems);
+galleryContainer.insertAdjacentHTML('beforeend', cardsMarkup)
 
-function createColorPhotosMarkup(gallery) {
-  return gallery
-    .map(({ preview, description, original }) => {
-      return `<div class="gallery__item">
-      <a class="gallery__link"  href="${original}">
-      <img
-      class="gallery__image"
-      src="${preview}"
-      data-source="${original}"
-      alt="${description}"
-    />
-  </a>
-</div>`;
+function createGalleryCardsMarkup(galleryItems) {
+  return galleryItems
+    .map(({ preview, original, description }) => {
+      return `
+      <div class="gallery__item">
+        <a class="gallery__item" href="${original}">
+            <img
+                class="gallery__image"
+                src="${preview}"
+                alt="${description}" />
+        </a>
+      </div>
+    `
     })
-    .join("");
-};
+    .join('')
+}
 
-galleryContainer.insertAdjacentHTML('beforeend', photosMarkup);
-
-const lightbox = new SimpleLightbox('.gallery a', {
-   captionsData: 'alt',
-   captionDelay: 250,
-});
+let gallery = new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionsData: 'alt',
+  captionDelay: 250,
+})
