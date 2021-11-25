@@ -14,9 +14,9 @@ function onFormSubmit(evt) {
     localStorage.removeItem(STORAGE_KEY);
 }
 
-function onTextareaInput(evt) {
+function onTextareaInput() {
     const formDataStringified = JSON.stringify({ email: form.email.value, message: form.message.value });
-    localStorage.setItem(STORAGE_KEY, message)
+    localStorage.setItem(STORAGE_KEY, formDataStringified)
 }
 
 function populateTextarea() {
